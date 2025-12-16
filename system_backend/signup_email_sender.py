@@ -50,7 +50,7 @@ def send_verification_email(recipient_email, verification_code):
     """
     # Sender credentials
     sender_email = "campus.ewallet@gmail.com"
-    sender_password = "wmqs rvav eref zlkz"
+    sender_password = "temporary password to protect the account"
 
     # Email subject
     subject = "Campus E-Wallet System - Register Account Verification"
