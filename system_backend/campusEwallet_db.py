@@ -1,3 +1,12 @@
+"""
+Database Module
+
+This module provides helper functions for connecting to the MySQL database
+and executing SQL queries. It supports executing write operations
+(INSERT, UPDATE, DELETE) and fetching single or multiple records
+from the database using parameterized queries.
+"""
+
 import mysql.connector
 from mysql.connector import Error
 
@@ -7,11 +16,11 @@ def connect_to_db():
     Establish a connection to the MySQL database.
 
     This function attempts to connect to the MySQL database using
-    the provided connection credentials.
+    the configured connection credentials.
 
     Returns:
         mysql.connector.connection.MySQLConnection | None:
-            A database connection object if successful,
+            A database connection object if the connection is successful,
             otherwise None if the connection fails.
     """
     try:
@@ -34,12 +43,13 @@ def execute_query(query, parameters=None):
     """
     Execute an SQL query that modifies the database.
 
-    This function is typically used for INSERT, UPDATE,
-    or DELETE queries. It commits the changes after execution.
+    This function is used for queries that change data such as
+    INSERT, UPDATE, or DELETE statements. The transaction is
+    committed after successful execution.
 
-    Args:
+    Parameters:
         query (str): The SQL query to be executed.
-        parameters (tuple | None): Optional parameters for
+        parameters (tuple | None): Optional values for
             parameterized SQL queries.
 
     Returns:
@@ -65,14 +75,14 @@ def execute_query(query, parameters=None):
 
 def fetch_one(query, parameters=None):
     """
-    Retrieve a single record from the database.
+    Fetch a single record from the database.
 
     This function executes a SELECT query and returns
     the first matching row as a dictionary.
 
-    Args:
+    Parameters:
         query (str): The SQL SELECT query to be executed.
-        parameters (tuple | None): Optional parameters for
+        parameters (tuple | None): Optional values for
             parameterized SQL queries.
 
     Returns:
@@ -97,14 +107,14 @@ def fetch_one(query, parameters=None):
 
 def fetch_all(query, parameters=None):
     """
-    Retrieve multiple records from the database.
+    Fetch multiple records from the database.
 
     This function executes a SELECT query and returns
     all matching rows as a list of dictionaries.
 
-    Args:
+    Parameters:
         query (str): The SQL SELECT query to be executed.
-        parameters (tuple | None): Optional parameters for
+        parameters (tuple | None): Optional values for
             parameterized SQL queries.
 
     Returns:

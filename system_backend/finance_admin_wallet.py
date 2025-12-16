@@ -178,10 +178,23 @@ class FinanceAdminWallet:
     @staticmethod
     def get_all_cashout_requests(search=None, status_filter="pending"):
         """
-        Retrieve all cash-out requests with optional search and status filter.
+        Retrieve all cash-out requests with optional search and status filtering.
+
+        This function fetches cash-out request records from the database,
+        optionally filtering by request status and applying a keyword search
+        across request ID, organization name, and service office name.
+
+        Parameters:
+            search (str | None): Optional search keyword used to filter results
+                by request ID, organization name, or service office name.
+            status_filter (str): Status of cash-out requests to retrieve.
+                Use "all" to disable status filtering. Defaults to "pending".
 
         Returns:
-            tuple: (bool, list of requests or error message)
+            tuple:
+                - bool: True if retrieval is successful, False otherwise.
+                - list[dict] | str: A list of cash-out request records if successful,
+                or an error message if an exception occurs.
         """
         try:
             params = []
@@ -228,10 +241,24 @@ class FinanceAdminWallet:
     @staticmethod
     def approve_cashin_request(request_id, admin_user_id):
         """
-        Approve a pending cash-in request and update wallet balance.
+        Approve a pending cash-in request and update the user's wallet balance.
+
+        This function verifies that the specified cash-in request is still pending,
+        credits the requested amount to the user's wallet, and updates the
+        request status to approved.
+
+        Parameters:
+            request_id (str): The unique identifier of the cash-in request
+                to be approved.
+            admin_user_id (str | int): The user ID of the administrator
+                approving the cash-in request.
 
         Returns:
-            tuple: (bool, message)
+            tuple:
+                - bool: True if the cash-in request is successfully approved,
+                False otherwise.
+                - str: A success message if approved, or an error message
+                if the operation fails.
         """
         try:
             # Retrieve pending cash-in request
@@ -268,7 +295,26 @@ class FinanceAdminWallet:
 
     @staticmethod
     def decline_cashin_request(request_id, reason=None):
-        """Reject a cash-in request and optionally record a reason."""
+        """
+        Decline a cash-in request and optionally record a rejection reason.
+
+        This method updates the specified cash-in request by marking it
+        as rejected and storing an optional decline reason along with
+        the date the request was processed.
+
+        Parameters:
+            request_id (str): The unique identifier of the cash-in request
+                to be rejected.
+            reason (str | None): Optional reason explaining why the
+                cash-in request was declined.
+
+        Returns:
+            tuple:
+                - bool: True if the cash-in request is successfully rejected,
+                False otherwise.
+                - str: A success message if rejected, or an error message
+                if the operation fails.
+        """
         try:
             # Reject cash-in request and record reason
             execute_query(
@@ -282,10 +328,25 @@ class FinanceAdminWallet:
     @staticmethod
     def approve_cashout_request(request_id, admin_user_id):
         """
-        Approve a pending cash-out request and deduct from wallets.
+        Approve a pending cash-out request and deduct the amount from the
+        appropriate wallet.
+
+        This method validates that the cash-out request is still pending,
+        deducts the requested amount from either an organization wallet
+        or a service wallet, and marks the request as approved.
+
+        Parameters:
+            request_id (str): The unique identifier of the cash-out request
+                to be approved.
+            admin_user_id (str | int): The user ID of the administrator
+                approving the cash-out request.
 
         Returns:
-            tuple: (bool, message)
+            tuple:
+                - bool: True if the cash-out request is successfully approved,
+                False otherwise.
+                - str: A success message if approved, or an error message
+                if the operation fails.
         """
         try:
             # Retrieve pending cash-out request
@@ -333,7 +394,26 @@ class FinanceAdminWallet:
     
     @staticmethod
     def decline_cashout_request(request_id, reason=None):
-        """Reject a cash-out request and optionally record a reason."""
+        """
+        Decline a cash-out request and optionally record a rejection reason.
+
+        This method updates the specified cash-out request by marking it
+        as rejected and storing an optional decline reason along with
+        the date the request was processed.
+
+        Parameters:
+            request_id (str): The unique identifier of the cash-out request
+                to be rejected.
+            reason (str | None): Optional reason explaining why the
+                cash-out request was declined.
+
+        Returns:
+            tuple:
+                - bool: True if the cash-out request is successfully rejected,
+                False otherwise.
+                - str: A success message if rejected, or an error message
+                if the operation fails.
+        """
         try:
             # Reject cash-out request and record reason
             execute_query(
