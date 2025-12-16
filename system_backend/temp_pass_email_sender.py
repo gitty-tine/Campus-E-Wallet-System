@@ -41,7 +41,7 @@ def send_temp_password(recipient_email, student_name, temp_password):
     """
     # Sender credentials
     sender_email = "campus.ewallet@gmail.com"
-    sender_password = "wmqs rvav eref zlkz"
+    sender_password = "temporary password to protect the account"
 
     # Email subject
     subject = "Campus E-Wallet System – Temporary Password Notification"
