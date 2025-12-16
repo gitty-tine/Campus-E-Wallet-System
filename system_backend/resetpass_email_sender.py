@@ -47,7 +47,7 @@ def send_password_reset_email(recipient_email, reset_code):
     """
     # Sender credentials
     sender_email = "campus.ewallet@gmail.com"
-    sender_password = "wmqs rvav eref zlkz"  
+    sender_password = "temporary password to protect the account"  
 
     # Email subject
     subject = "Campus E-Wallet System - Password Reset Verification"
